@@ -1,0 +1,293 @@
+:root {
+  --page: #e3e7df;
+  --body: #2c3a47;
+  --body-edge: #1f2a34;
+  --lcd: #b8c4a3;
+  --lcd-ink: #1c2619;
+  --lcd-dim: #4e5c46;
+  --key-digit: #eef1ea;
+  --key-digit-ink: #2c3a47;
+  --key-fn: #475a6d;
+  --key-op: #5d7389;
+  --key-ink-light: #f3f5f1;
+  --amber: #e09a33;
+  --amber-ink: #2a1c07;
+  --error: #8f2a12;
+  --focus: #e09a33;
+
+  --font-ui: 'Figtree', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-lcd: 'Chivo Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  color-scheme: light dark;
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page: #161c21;
+    --body: #27333f;
+    --body-edge: #10161b;
+    --key-digit: #d9ddd4;
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  background: var(--page);
+  color: var(--body);
+  font-family: var(--font-ui);
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 1.5rem 1rem;
+}
+
+.page__hint {
+  max-width: 22rem;
+  margin: 0;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+  text-align: center;
+  color: #6a7580;
+}
+
+.page__hint kbd {
+  font-family: var(--font-ui);
+  font-size: 0.75rem;
+  padding: 0.05rem 0.35rem;
+  border-radius: 4px;
+  border: 1px solid #b7bfc5;
+  background: #f6f7f4;
+  color: #3b4650;
+}
+
+@media (prefers-color-scheme: dark) {
+  .page__hint {
+    color: #8b969f;
+  }
+  .page__hint kbd {
+    background: #222b33;
+    border-color: #3a4651;
+    color: #c8d0d6;
+  }
+}
+
+/* Calculator body ------------------------------------------------------ */
+
+.calculator {
+  width: min(100%, 22rem);
+  padding: 1.25rem;
+  border-radius: 28px;
+  background: var(--body);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.08),
+    0 3px 0 var(--body-edge),
+    0 18px 40px -18px rgb(20 30 40 / 0.55);
+}
+
+/* LCD display ----------------------------------------------------------- */
+
+.display {
+  display: grid;
+  gap: 0.25rem;
+  padding: 0.85rem 1rem 0.6rem;
+  margin-bottom: 1.25rem;
+  border-radius: 12px;
+  background:
+    linear-gradient(180deg, rgb(0 0 0 / 0.07), transparent 40%),
+    var(--lcd);
+  box-shadow:
+    inset 0 2px 6px rgb(0 0 0 / 0.28),
+    0 1px 0 rgb(255 255 255 / 0.08);
+  color: var(--lcd-ink);
+  font-family: var(--font-lcd);
+  text-align: right;
+  transition: opacity 120ms ease;
+}
+
+.display[aria-busy='true'] {
+  opacity: 0.7;
+}
+
+.display__expression {
+  min-height: 1.25rem;
+  font-size: 0.9375rem;
+  color: var(--lcd-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.display__value {
+  display: block;
+  font-size: 2.75rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.display__value--sm {
+  font-size: 2.1rem;
+}
+
+.display__value--xs {
+  font-size: 1.6rem;
+}
+
+.display__error {
+  min-height: 1.1rem;
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--error);
+  text-align: left;
+}
+
+/* Keys ------------------------------------------------------------------ */
+
+.keypad {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.keypad__advanced,
+.keypad__main {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+}
+
+.key {
+  --face: var(--key-digit);
+  --ink: var(--key-digit-ink);
+  appearance: none;
+  border: 0;
+  border-radius: 14px;
+  min-height: 3.5rem;
+  background: var(--face);
+  color: var(--ink);
+  font-family: var(--font-ui);
+  font-size: 1.375rem;
+  font-weight: 500;
+  cursor: pointer;
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.18),
+    0 3px 0 rgb(0 0 0 / 0.32);
+  transition:
+    transform 60ms ease,
+    box-shadow 60ms ease,
+    filter 120ms ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.key:hover:not(:disabled) {
+  filter: brightness(1.06);
+}
+
+.key:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow:
+    inset 0 1px 0 rgb(255 255 255 / 0.12),
+    0 1px 0 rgb(0 0 0 / 0.32);
+}
+
+.key:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.key:disabled {
+  cursor: progress;
+}
+
+.key--function {
+  --face: var(--key-fn);
+  --ink: var(--key-ink-light);
+  font-size: 1.125rem;
+}
+
+.key--operator {
+  --face: var(--key-op);
+  --ink: var(--key-ink-light);
+  font-size: 1.5rem;
+}
+
+.key--operator[aria-pressed='true'],
+.key--advanced[aria-pressed='true'] {
+  --face: var(--key-ink-light);
+  --ink: var(--body);
+}
+
+.key--advanced {
+  --face: transparent;
+  --ink: var(--key-ink-light);
+  min-height: 2.5rem;
+  font-size: 1rem;
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.22);
+}
+
+.key--advanced:active:not(:disabled) {
+  transform: none;
+  box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.4);
+}
+
+.key--wide {
+  grid-column: span 2;
+}
+
+.key--equals {
+  --face: var(--amber);
+  --ink: var(--amber-ink);
+  font-size: 1.625rem;
+  font-weight: 600;
+}
+
+@media (max-width: 360px) {
+  .calculator {
+    padding: 1rem;
+    border-radius: 22px;
+  }
+  .key {
+    min-height: 3rem;
+  }
+  .display__value {
+    font-size: 2.25rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .key,
+  .display {
+    transition: none;
+  }
+  .key:active:not(:disabled) {
+    transform: none;
+  }
+}

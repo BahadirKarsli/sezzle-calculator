@@ -1,0 +1,42 @@
+
+ RUN  v2.1.9 /home/claude/sezzle-calculator/frontend
+      Coverage enabled with v8
+
+ ✓ src/components/Calculator.test.tsx (12 tests) 2662ms
+   ✓ <Calculator /> > adds two numbers through the API 414ms
+   ✓ <Calculator /> > chains operations left to right 332ms
+   ✓ <Calculator /> > uses the square root as the right operand of a pending operation 313ms
+ ✓ src/state/calculatorReducer.test.ts (17 tests) 8ms
+ ✓ src/api/client.test.ts (7 tests) 14ms
+ ✓ src/components/Calculator.handleKey.test.ts (12 tests) 11ms
+ ✓ src/lib/format.test.ts (22 tests) 6ms
+ ✓ src/lib/errors.test.ts (3 tests) 3ms
+ ✓ src/App.test.tsx (1 test) 69ms
+
+ Test Files  7 passed (7)
+      Tests  74 passed (74)
+   Start at  19:50:14
+   Duration  10.19s (transform 214ms, setup 579ms, collect 713ms, tests 2.77s, environment 3.49s, prepare 669ms)
+
+ % Coverage report from v8
+-------------------|---------|----------|---------|---------|-------------------
+File               | % Stmts | % Branch | % Funcs | % Lines | Uncovered Line #s 
+-------------------|---------|----------|---------|---------|-------------------
+All files          |   98.51 |    91.93 |      90 |   98.51 |                   
+ src               |     100 |      100 |     100 |     100 |                   
+  App.tsx          |     100 |      100 |     100 |     100 |                   
+ src/api           |     100 |      100 |     100 |     100 |                   
+  client.ts        |     100 |      100 |     100 |     100 |                   
+  types.ts         |     100 |      100 |     100 |     100 |                   
+ src/components    |    98.4 |     93.1 |   89.47 |    98.4 |                   
+  Calculator.tsx   |   95.91 |    93.93 |     100 |   95.91 | 39-40             
+  Display.tsx      |     100 |       75 |     100 |     100 | 10-11             
+  Keypad.tsx       |     100 |      100 |   85.71 |     100 |                   
+ src/hooks         |   97.05 |    72.22 |   66.66 |   97.05 |                   
+  useCalculator.ts |   97.05 |    72.22 |   66.66 |   97.05 | 61-63             
+ src/lib           |     100 |      100 |     100 |     100 |                   
+  errors.ts        |     100 |      100 |     100 |     100 |                   
+  format.ts        |     100 |      100 |     100 |     100 |                   
+ src/state         |   98.31 |    97.87 |     100 |   98.31 |                   
+  ...torReducer.ts |   98.31 |    97.87 |     100 |   98.31 | 87-88             
+-------------------|---------|----------|---------|---------|-------------------
